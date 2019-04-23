@@ -8,7 +8,8 @@ import io.realm.RealmObject;
 import io.realm.RealmList;
 import io.realm.RealmResults;
 
-class Sitio  extends RealmObject{
+public class Sitio  extends RealmObject{
+    private int id;
     private String name;
     private String descripcion;
 
@@ -17,8 +18,17 @@ class Sitio  extends RealmObject{
     }
 
     public Sitio(String sitio, String descripcion) {
+        this.id = MiAplicacion.sitioId.incrementAndGet();
         this.name = sitio;
         this.descripcion = descripcion;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescripcion() {

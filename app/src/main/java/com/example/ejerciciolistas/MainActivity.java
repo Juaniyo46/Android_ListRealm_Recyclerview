@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,15 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
 
         realm = Realm.getDefaultInstance();
         findViewID();
+
+        nextBtn = findViewById(R.id.siguiente);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SaveActivity.class);
+                startActivityForResult(intent,2);
+            }
+        });
     }
 
     private void findViewID(){
