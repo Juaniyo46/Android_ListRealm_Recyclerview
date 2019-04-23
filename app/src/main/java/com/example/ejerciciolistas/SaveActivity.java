@@ -25,13 +25,6 @@ public class SaveActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*
-                //Esto es lo del Gson para guardar los datos que se inserten y salir sin que se borren.
-                SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("sitio","NombreCiudad");*/
-
-
 
                 EditText name = findViewById(R.id.texto);
                 EditText desc = findViewById(R.id.textDescription);

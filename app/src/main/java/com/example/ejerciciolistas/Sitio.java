@@ -1,8 +1,20 @@
 package com.example.ejerciciolistas;
 
-class Sitio {
+import android.content.Context;
+
+import java.util.Date;
+
+import io.realm.RealmObject;
+import io.realm.RealmList;
+import io.realm.RealmResults;
+
+class Sitio  extends RealmObject{
     private String name;
     private String descripcion;
+
+    public Sitio(){
+
+    }
 
     public Sitio(String sitio, String descripcion) {
         this.name = sitio;
