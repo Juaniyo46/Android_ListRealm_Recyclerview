@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,11 +31,11 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
 
     public Realm realm;
 
-    Button nextBtn;
-    Button loadBtn;
-    RecyclerView rv;
-    RVAdapter adapter;
-    RealmResults<Sitio> listado;
+    private Button nextBtn;
+    //private Button edit;
+    private RecyclerView rv;
+    private RVAdapter adapter;
+    private RealmResults<Sitio> listado;
 
 
 
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
                 startActivityForResult(intent,2);
             }
         });
+
+
     }
 
     private void findViewID(){
@@ -65,18 +68,20 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapter = new RVAdapter(getApplicationContext(),listado);
         rv.setAdapter(adapter);
-
-        listenOnclick();
-    }
-
-    private void listenOnclick(){
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Sitio sitio = listado.get(rv.getChildAdapterPosition(v));
                 alertEditarSitio(sitio);
             }
         });
+        listenOnclick();
+    }
+
+    private void listenOnclick(){
+
+
 
         adapter.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -145,7 +150,7 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
     }
 
     @Override
-    public void onChange(RealmResults<Sitio> sitios) {
+    public void onChange(@NonNull  RealmResults<Sitio> sitios) {
         adapter.notifyDataSetChanged();
     }
 }

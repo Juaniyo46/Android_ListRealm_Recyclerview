@@ -21,15 +21,7 @@
         android:layout_marginTop="20dp"
         android:background="@color/rojizo"/>
 
-    <Button
-        android:id="@+id/showData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Load"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/rojizo"
-        android:layout_toRightOf="@+id/siguiente"/>
+
 
 
 </RelativeLayout>
@@ -40,7 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp" />
-
 
 
 </LinearLayout>

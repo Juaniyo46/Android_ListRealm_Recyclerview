@@ -3,9 +3,11 @@ package com.example.ejerciciolistas;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -14,16 +16,15 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SitioViewHolder>
         implements View.OnClickListener, View.OnLongClickListener{
 
     private Context context;
+    private Button edit;
     private List<Sitio> listado;
     private View.OnClickListener listener;
     private View.OnLongClickListener onLongClickListener;
 
-
-
-
     List<Sitio> sitios;
 
-    RVAdapter(Context applicationContext, List<Sitio> sitios){
+    public RVAdapter(Context context, List<Sitio> sitios){
+        this.context = context;
         this.sitios = sitios;
     }
 
@@ -32,6 +33,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SitioViewHolder>
     public SitioViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item,
                 viewGroup, false);
+        v.setOnClickListener(this);
+        v.setOnLongClickListener(this);
         final SitioViewHolder sitioViewHolder = new SitioViewHolder(v);
 
 
@@ -68,17 +71,22 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SitioViewHolder>
 
     @Override
     public boolean onLongClick(View v) {
+        if (onLongClickListener != null){
+            onLongClickListener.onLongClick(v);
+        }
         return false;
     }
 
     public static class SitioViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView desc;
+       // Button edit;
 
         public SitioViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.inserccion);
             desc = view.findViewById(R.id.descripcion);
+            //edit = view.findViewById(R.id.editar);
         }
     }
 }
