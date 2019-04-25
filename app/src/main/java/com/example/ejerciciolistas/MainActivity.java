@@ -65,10 +65,17 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
         listado.addChangeListener(this);
         rv = findViewById(R.id.lista);
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new RVAdapter(getApplicationContext(),listado);
+        adapter = new RVAdapter(getApplicationContext(), listado, new ButtonsInterface() {
+            @Override
+            public void onClick(View view, int i) {
+                Toast.makeText(MainActivity.this, "Entra", Toast.LENGTH_SHORT).show();
+                final Sitio sitio = listado.get(rv.getChildAdapterPosition(view));
+                SitioRepository.eliminarSitio(realm,sitio,listado);
+            }
+        });
         rv.setAdapter(adapter);
 
-        adapter.borrar(new View.OnClickListener() {
+        /*adapter.borrar(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.e("Prueba","dentro");
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
                 sitio.deleteFromRealm();
                 realm.commitTransaction();
             }
-        });
+        });*/
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override

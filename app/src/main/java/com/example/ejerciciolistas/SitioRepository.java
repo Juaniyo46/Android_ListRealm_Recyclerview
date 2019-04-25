@@ -16,8 +16,8 @@ public class SitioRepository {
         realm.commitTransaction();
     }
 
-    public static void eliminarSitio(View v, Realm realm, RecyclerView rv, RealmResults<Sitio> listado){
-        Sitio sitio = listado.get(rv.getChildAdapterPosition(v));
+    public static void eliminarSitio (Realm realm, Sitio sitio, RealmResults<Sitio> listado){
+
         realm.beginTransaction();
         assert sitio != null;
         sitio.deleteFromRealm();

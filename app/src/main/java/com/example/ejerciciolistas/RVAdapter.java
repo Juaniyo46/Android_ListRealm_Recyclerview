@@ -15,6 +15,7 @@ import java.util.List;
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SitioViewHolder>
         implements View.OnClickListener, View.OnLongClickListener{
 
+    private ButtonsInterface intlistener;
     private Context context;
     //private Button edit;
     //private Button borrar;
@@ -24,9 +25,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SitioViewHolder>
 
     List<Sitio> sitios;
 
-    public RVAdapter(Context context, List<Sitio> sitios){
+    public RVAdapter(Context context, List<Sitio> sitios, ButtonsInterface intlistener){
         this.context = context;
         this.sitios = sitios;
+        this.intlistener = intlistener;
     }
 
     @NonNull
@@ -38,6 +40,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SitioViewHolder>
         v.setOnLongClickListener(this);
 
         final SitioViewHolder sitioViewHolder = new SitioViewHolder(v);
+
+        sitioViewHolder.borrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intlistener.onClick(v,sitioViewHolder.getAdapterPosition());
+            }
+        });
 
         return sitioViewHolder;
     }
