@@ -32,12 +32,11 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
     public Realm realm;
 
     private Button nextBtn;
+    private Button atrasBtn;
     //private Button edit;
     private RecyclerView rv;
     private RVAdapter adapter;
     private RealmResults<Sitio> listado;
-
-
 
 
 
@@ -68,6 +67,19 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapter = new RVAdapter(getApplicationContext(),listado);
         rv.setAdapter(adapter);
+
+        adapter.borrar(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("Prueba","dentro");
+                Sitio sitio = listado.get(rv.getChildAdapterPosition(v));
+                realm.beginTransaction();
+                assert sitio != null;
+                sitio.deleteFromRealm();
+                realm.commitTransaction();
+            }
+        });
+
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

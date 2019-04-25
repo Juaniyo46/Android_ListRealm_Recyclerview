@@ -26,13 +26,36 @@
         android:layout_marginTop="20dp"
         android:hint="Introduzca una descripción"/>
 
-    <Button
-        android:id="@+id/anadir"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="añadir"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@color/rojizo"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/atras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atras"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@color/rojizo"
+            android:layout_marginRight="10dp"/>
+
+        <Button
+            android:id="@+id/anadir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="añadir"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@color/rojizo"
+            android:layout_marginLeft="10dp"/>
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

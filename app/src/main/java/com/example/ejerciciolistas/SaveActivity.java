@@ -14,6 +14,14 @@ import android.widget.EditText;
 public class SaveActivity extends AppCompatActivity {
 
     Button button;
+    Button atrasBtn;
+
+
+    @Override
+    public void onBackPressed (){
+        Intent intent = new Intent(SaveActivity.this, MainActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,15 @@ public class SaveActivity extends AppCompatActivity {
                 intent.putExtra("descripcion", descIntent);
                 setResult(2,intent);
                 finish();
+            }
+        });
+
+        atrasBtn = findViewById(R.id.atras);
+        atrasBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SaveActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
