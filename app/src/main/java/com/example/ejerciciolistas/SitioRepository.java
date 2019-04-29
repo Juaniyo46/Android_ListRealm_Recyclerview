@@ -27,7 +27,6 @@ public class SitioRepository {
 
 
     public static void eliminarSitio (Realm realm,Sitio sitio, RealmResults<Sitio> listado){
-       // Sitio sitio = listado.get(rv.getChildAdapterPosition(v));
         realm.beginTransaction();
         assert sitio != null;
         sitio.deleteFromRealm();

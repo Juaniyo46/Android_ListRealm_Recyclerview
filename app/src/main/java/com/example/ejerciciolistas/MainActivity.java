@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
     public Realm realm;
 
     private Button nextBtn;
-    private Button atrasBtn;
-    //private Button edit;
     private RecyclerView rv;
     private RVAdapter adapter;
     private RealmResults<Sitio> listado;
@@ -76,8 +74,16 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
         adapter = new RVAdapter(getApplicationContext(), listado, new ButtonsInterface() {
             @Override
             public void onClick(View view, int i) {
-                final Sitio sitio = listado.get(i);
-                SitioRepository.eliminarSitio(realm,sitio,listado);
+                if (view.getId() == R.id.borrar){
+                    final Sitio sitio = listado.get(i);
+                    SitioRepository.eliminarSitio(realm,sitio,listado);
+
+                } else if (view.getId() == R.id.editar){
+                    final Sitio sitio = listado.get(i);
+                    SitioRepository.alertEditarSitio(sitio,MainActivity.this,realm);
+                }
+
+
             }
         });
         rv.setAdapter(adapter);
@@ -107,11 +113,6 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
             }
         });
     }
-
-
-
-
-
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
