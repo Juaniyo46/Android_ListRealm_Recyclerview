@@ -55,6 +55,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SitioViewHolder>
     public void onBindViewHolder(@NonNull SitioViewHolder sitioViewHolder, int i) {
         sitioViewHolder.name.setText(sitios.get(i).getName());
         sitioViewHolder.desc.setText(sitios.get(i).getDescripcion());
+
     }
 
     @Override
@@ -100,7 +101,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SitioViewHolder>
             super(view);
             name = view.findViewById(R.id.inserccion);
             desc = view.findViewById(R.id.descripcion);
+
             edit = view.findViewById(R.id.editar);
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
             borrar = view.findViewById(R.id.borrar);
             borrar.setOnClickListener(new View.OnClickListener() {
                 @Override

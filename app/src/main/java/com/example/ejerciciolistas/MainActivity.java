@@ -65,34 +65,30 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
         listado.addChangeListener(this);
         rv = findViewById(R.id.lista);
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        adapter =new RVAdapter(getApplicationContext(), listado, new ButtonsInterface() {
+            @Override
+            public void onClick(View view, int i) {
+                final Sitio sitio = listado.get(i);
+            }
+        });
+
         adapter = new RVAdapter(getApplicationContext(), listado, new ButtonsInterface() {
             @Override
             public void onClick(View view, int i) {
-                Toast.makeText(MainActivity.this, "Entra", Toast.LENGTH_SHORT).show();
-                final Sitio sitio = listado.get(rv.getChildAdapterPosition(view));
+                final Sitio sitio = listado.get(i);
                 SitioRepository.eliminarSitio(realm,sitio,listado);
             }
         });
         rv.setAdapter(adapter);
 
-        /*adapter.borrar(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e("Prueba","dentro");
-                Sitio sitio = listado.get(rv.getChildAdapterPosition(v));
-                realm.beginTransaction();
-                assert sitio != null;
-                sitio.deleteFromRealm();
-                realm.commitTransaction();
-            }
-        });*/
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Sitio sitio = listado.get(rv.getChildAdapterPosition(v));
-                alertEditarSitio(sitio);
+                SitioRepository.alertEditarSitio(sitio, MainActivity.this, realm );
             }
         });
         listenOnclick();
@@ -105,52 +101,14 @@ public class MainActivity extends AppCompatActivity  implements RealmChangeListe
         adapter.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                SitioRepository.eliminarSitio(v,realm,rv,listado);
+                final Sitio sitio = listado.get(rv.getChildAdapterPosition(v));
+                SitioRepository.eliminarSitio(realm,sitio,listado);
                 return false;
             }
         });
     }
 
-    public void alertEditarSitio(final Sitio sitio){
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        final View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialogo,null);
-        builder.setView(view);
-
-        final EditText etSitio = view.findViewById(R.id.nombreSitio);
-        final EditText etDescripcion = view.findViewById(R.id.descripcionSitio);
-        builder.setMessage("Editar");
-
-        etSitio.setText(sitio.getName());
-        etDescripcion.setText(sitio.getDescripcion());
-
-        etSitio.setSelection(etSitio.getText().length()); //Posicionamos el cursor al final
-
-        builder.setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                String nombreSitio = etSitio.getText().toString();
-                String descripcion = etDescripcion.getText().toString();
-                if (nombreSitio.length()>0){
-                    realm.beginTransaction();
-                    sitio.setName(nombreSitio);
-                    sitio.setDescripcion(descripcion);
-                    realm.commitTransaction();
-                } else
-                    Toast.makeText(getApplicationContext(), "Por favor rellene todos los campos", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-
-            }
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
 
 
 
